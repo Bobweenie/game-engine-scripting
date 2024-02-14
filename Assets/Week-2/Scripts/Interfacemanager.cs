@@ -6,15 +6,15 @@ public class Interfacemanager : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    void 
-    void Start()
+    void
+     Start()
     {
-        Debug.Log("Start")
+        Debug.Log("Start");
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Update")
+        Debug.Log("Update");
     }
 }
