@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -25,7 +26,7 @@ namespace Battleships
         private int nCols;
         //current row/column we are on
         private int row;
-        private int cols;
+        private int col;
         //correctly hit ships
         private int score;
         //Total time game has been running
@@ -50,12 +51,45 @@ namespace Battleships
             //Populate the gid using loop
             //Need to excute as many times to fill up the grid
             //Can  figure that out by calculating rows * cols
-            for (int i = 0; i < nRows; i++)
+            for (int i = 0; i < nRows * nCols; i++)
             {
                 //Create an instance of the prefab amd child it to the gridRoot
                 {
                     Instantiate(cellPrefab, gridRoot);
                 }
+            }
+
+            Transform GetCurrentCell()
+            {
+                int index = (row * nCols) + col;
+                //return the child by index 
+                return gridRoot.GetChild(index);
+            }
+
+            void SelectCurrentCell()
+            {
+                //get current cell
+                Transform cell = GetCurrentCell();
+                // set curser image on
+                Transform cursor = cell.Find("cursor");
+                cursor.gameObject.SetActive(true);
+            }
+
+            void UnselectCurrentCell()
+            {
+                Transform cell = GetCurrentCell();
+                Transform cursor = cell.Find("cursor");
+                cursor.gameObject.SetActive(false);
+            }
+
+            public void MoveVertiacl(int amt)
+            {
+                //since we are moving to a new cell
+                //we need to unselect the current one 
+                UnselectCurrentCell();
+                row += amt;
+                row = Mathf.Clamp(row, 0, nRows - 1);
+                SelectCurrentCell();
             }
             // Start is called before the first frame update
             void Start()
