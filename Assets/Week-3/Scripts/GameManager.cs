@@ -82,7 +82,7 @@ namespace Battleships
                 cursor.gameObject.SetActive(false);
             }
 
-            public void MoveVertiacl(int amt)
+            void MoveVertiacl(int amt)
             {
                 //since we are moving to a new cell
                 //we need to unselect the current one 
